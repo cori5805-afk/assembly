@@ -1,3 +1,42 @@
-1. 
----
-2. 
+4.1
+
+Translate the following hex value to Nios II assembly code:
+
+993ff915 --> 1001_1001_0011_1111_1111_1001_0001_0101
+
+	      9     9   3     f    f    9   1     5
+
+Last 6 bits are OP regardless of type: 01_0101 --> 0x15 --> stw (store word into memory)
+
+16 bit signed immediate value --> 1111_1111_1110_0100 --> 0xffe4 
+				    f    f    e    4
+
+10011_00100: these bits give registers
+  rA	 rB
+
+rA = 19, rB = 4
+
+stw format: stw rB, Mem32[rA + sigma(IMM16)] <- rB
+
+so:
+
+stw r4, 0xffe4(r4) (interpreted as signed offset)
+
+
+4.2
+
+Convert the following assembly code into machine code:
+
+divu r14, r5, r22
+
+OP    rA  rB	IMM16
+
+divu = 0x34
+
+r14 = 0x0e
+
+r5 = 0x05
+
+IMM16 = r22 = 0x16
+
+so 1110_0101_0000_0000_0101_10_0100
